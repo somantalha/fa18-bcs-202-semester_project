@@ -5,16 +5,19 @@ const auth = require("../../middlewares/auth");
 const admin = require("../../middlewares/admin");
 var { Product } = require("../../models/product");
 //get products
-router.get("/",auth, async (req, res) => {
+// auth,
+router.get("/", async (req, res) => {
   console.log(req.user);
   let page = Number(req.query.page ? req.query.page : 1);
-  let perPage = Number(req.query.perPage ? req.query.perPage : 10);
+  let perPage = Number(req.query.perPage ? req.query.perPage : 8);
   let skipRecords = perPage * (page - 1);
   let products = await Product.find().skip(skipRecords).limit(perPage);
-  return res.send(products);
+  let total = await Product.countDocuments();
+  return res.send({ total, products });
 });
 //get single products
-router.get("/:id",auth, async (req, res) => {
+// auth,
+router.get("/:id", async (req, res) => {
   try {
     let product = await Product.findById(req.params.id);
     if (!product)
@@ -25,7 +28,7 @@ router.get("/:id",auth, async (req, res) => {
   }
 });
 //update a record
-router.put("/:id",auth, validateProduct, async (req, res) => {
+router.put("/:id", auth, admin, validateProduct, async (req, res) => {
   let product = await Product.findById(req.params.id);
   product.name = req.body.name;
   product.price = req.body.price;
@@ -40,7 +43,10 @@ router.delete("/:id", auth, admin, async (req, res) => {
 });
 //Insert a record
 router.post("/", auth, admin, validateProduct, async (req, res) => {
-  let product = new Product();
+  let product = await Product.findOne({ name: req.body.name });
+  if (product)
+    return res.status(400).send("Product with same name already exist!");
+  product = new Product();
   product.name = req.body.name;
   product.price = req.body.price;
   product.quantity = req.body.quantity;

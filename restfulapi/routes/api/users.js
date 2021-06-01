@@ -15,7 +15,16 @@ router.post("/register", async (req, res) => {
   user.role = req.body.role;
   await user.generateHashedPassword();
   await user.save();
-  return res.send(_.pick(user, ["name", "email"]));
+  let token = jwt.sign(
+    { _id: user._id, name: user.name, role: user.role },
+    config.get("jwtPrivateKey")
+  );
+  let dataToReturn = {
+    name: user.name,
+    email: user.email,
+    token: user.token,
+  };
+  return res.send(dataToReturn);
 });
 router.post("/login", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
@@ -23,7 +32,7 @@ router.post("/login", async (req, res) => {
   let isValid = await bcrypt.compare(req.body.password, user.password);
   if (!isValid) return res.status(401).send("Invalid Password");
   let token = jwt.sign(
-    { _id: user._id, name: user.name },
+    { _id: user._id, name: user.name, role: user.role },
     config.get("jwtPrivateKey")
   );
   res.send(token);
