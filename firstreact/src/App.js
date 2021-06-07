@@ -16,8 +16,7 @@ import Footercomp from "./components/footercomp";
 import landingpage from "./components/landingpage";
 import homepage from "./components/homepage";
 import features from "./components/features";
-import blog from "./components/blog";
-import contact from "./components/contact";
+import Blog from "./components/Blog";
 import about from "./components/about";
 import NotFound from "./components/pagenotfound";
 import NewProduct from "./components/products/NewProduct";
@@ -33,6 +32,10 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Contact from "./components/contact";
+import BlogInspiringWays from "./components/BlogInspiringWays";
+import BlogGreatBigList from "./components/BlogGreatBigList";
+import BlogWintertoSpringFashion from "./components/BlogWinter-to-SpringFashion";
 function App() {
   return (
     <Router>
@@ -42,7 +45,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/home/AllProducts" component={AllProducts} />
+          <Route path="/home/AllProducts/:page?" component={AllProducts} />
           <Route path="/home/Shoes" component={Shoes} />
           <Route path="/home/Watches" component={Watches} />
           <Route path="/home/Bags" component={Bags} />
@@ -53,9 +56,14 @@ function App() {
           <Route path="/addnew" component={NewProduct} />
           <Route path="/update/:id" component={UpdateProduct} />
           <Route path="/features" component={features} />
-          <Route path="/blog/:page?" component={blog} />
-          {/* <Route path="/blog" component={blog} /> */}
-          <Route path="/contact" component={contact} />
+          <Route
+            path="/blog/BlogWinter-to-SpringFashion"
+            component={BlogWintertoSpringFashion}
+          />
+          <Route path="/blog/BlogGreatBigList" component={BlogGreatBigList} />
+          <Route path="/blog/BlogInspiringWays" component={BlogInspiringWays} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/contact" component={Contact} />
           <Route path="/about" component={about} />
           <Route path="/Not-Found" exact component={NotFound} />
           <Route path="/" exact component={landingpage} />

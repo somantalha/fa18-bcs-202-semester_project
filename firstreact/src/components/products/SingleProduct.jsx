@@ -9,11 +9,27 @@ const SingleProduct = (props) => {
   const { product, onDelete, history } = props;
   return (
     <Grid item xs={4}>
-      <h2>{product.name}</h2>
-      <p>{product.price} </p>{" "}
+      <h2>
+        <strong>Name:</strong> {product.name}
+      </h2>
+      <p>
+        <strong>Price: </strong>
+        {product.price}{" "}
+      </p>
+      <p>
+        <strong>Product Category: </strong>
+        {product.category}
+      </p>
+      {/* <div>
+        <img id="imgsize" src="../../task_1/s4.jpg" alt="Men" width="100%" />
+        <div className="centertext">Brown three piece</div>
+      </div>{" "} */}
       {userService.isAdmin() && (
         <>
-          <p>{product.quantity} </p>{" "}
+          <p>
+            <strong>Quantity: </strong>
+            {product.quantity}{" "}
+          </p>{" "}
           <Button
             variant="contained"
             color="secondary"

@@ -69,10 +69,10 @@ const Products = (props) => {
             onChange={(e, value) => {
               console.log(value);
               console.log(props);
-              props.history.push("/blog/" + value);
+              props.history.push("/home/AllProducts/" + value);
             }}
           />
-          Total produts: {total} Showing {(page - 1) * perPage} to{" "}
+          Total produts: {total} Showing {(page - 1) * perPage + 1} to{" "}
           {(page - 1) * perPage + products.length}
         </Grid>
       </div>

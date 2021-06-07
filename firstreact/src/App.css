@@ -1,10 +1,20 @@
 * {
   box-sizing: border-box;
 }
+.tagsblog:hover {
+  color: rgb(82, 148, 223);
+}
+.bloglink {
+  color: rgb(1, 7, 15);
+}
+.bloglink:hover {
+  color: rgb(82, 148, 223);
+}
 .topContainer {
   display: flex;
   flex-direction: row;
 }
+
 #top img {
   position: relative;
   z-index: -1;
@@ -16,8 +26,96 @@
   padding-bottom: 50px;
   padding-top: 2px;
 }
-.navbar-default {
+.blogcover img {
+  position: relative;
+  z-index: -1;
+  display: block;
+  width: 1340px;
+  height: auto;
+  margin-left: 2px;
+  padding-left: 4px;
+  padding-bottom: 50px;
+  padding-top: 2px;
+}
+.blogcover h1 {
+  position: absolute;
+  top: 10%;
+  padding-left: 35rem;
+  font-size: 3rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+#aboutcover {
+  display: flex;
+  flex-direction: row;
+}
+#aboutcover img {
+  position: relative;
+  z-index: -1;
+  display: block;
+  width: 1340px;
+  height: auto;
+  margin-left: 2px;
+  padding-left: 4px;
+  padding-bottom: 50px;
+  padding-top: 2px;
+}
+.RightAbout1 {
+  height: 100%;
+
+  display: block;
+  margin-left: 7rem;
+  margin-bottom: 4rem;
+  margin-top: 3rem;
+  margin-right: 3rem;
+  width: 100%;
+}
+
+.LeftAbout2 {
+  height: 100%;
+
+  display: block;
+  margin-left: 4rem;
+  margin-bottom: 4rem;
+  margin-top: 3rem;
+  margin-right: 5rem;
+  width: 100%;
+}
+.inner {
+  overflow: hidden;
+}
+.inner img {
+  transition: all 1.5s ease;
+}
+.inner:hover img {
+  transform: scale(1.5);
+}
+.RightAbout2 {
+  height: 100%;
+  width: 100%;
+}
+.LeftAbout1 {
+  height: 100%;
+  width: 100%;
+  margin-left: 5rem;
+}
+.blogimg1 img {
+  width: 50rem;
+  height: 30rem;
+}
+#aboutimg1 img {
+  width: 20rem;
+  height: 20rem;
+}
+#aboutimg2 img {
+  width: 20rem;
+  height: 25rem;
+}
+.navbar {
   background: transparent;
+}
+.navbar.active {
+  background: linear-gradient(90deg, white, white);
 }
 #white {
   padding-top: 2px;
@@ -26,9 +124,6 @@
 #white strong {
   color: rgb(51, 47, 47);
   font-size: 1.25rem;
-}
-#white:hover {
-  color: rgb(199, 184, 184);
 }
 #clr {
   color: rgb(199, 184, 184);
@@ -133,7 +228,7 @@ footer {
   font-size: 15px;
 }
 
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
   * {
     box-sizing: border-box;
   }
@@ -228,23 +323,23 @@ footer {
     text-decoration: none;
   }
 
-  /* Add a hover effect if you want */
+  Add a hover effect if you want
   .fa:hover {
     opacity: 0.7;
   }
 
-  /* Set a specific color for each brand */
+  Set a specific color for each brand 
 
-  /* Facebook */
+  Facebook 
   .fa-facebook {
     color: rgb(194, 186, 186);
   }
 
-  /* Twitter */
+  Twitter
   .fa-twitter {
     color: rgb(194, 186, 186);
   }
   .fa-instagram {
     color: rgb(194, 186, 186);
   }
-}
+} */

@@ -3,18 +3,27 @@ import React from "react";
 import productService from "../../services/ProductService";
 import Admin from "../auth/Admin";
 import Auth from "../auth/Auth";
-
+// var name = " ";
+// var quantity = 0;
+// var price = 0;
+// var category = "none";
 const UpdateProduct = (props) => {
-  const [name, setName] = React.useState("");
-  const [price, setPrice] = React.useState(0);
-  const [quantity, setQuantity] = React.useState(0);
+  const [name, setName] = React.useState();
+  const [price, setPrice] = React.useState();
+  const [quantity, setQuantity] = React.useState();
+  const [category, setCategory] = React.useState();
+
   // console.log(props.match.params.id);
   const id = props.match.params.id;
   React.useEffect(() => {
     productService.getSingleProduct(id).then((data) => {
-      setName(data.name);
-      setPrice(data.price);
-      setQuantity(data.quantity);
+      // console.log(data.name);
+      // name = data.name;
+      // quantity = data.quantity;
+      // price = data.price;
+      setName(name);
+      setPrice(price);
+      setQuantity(quantity);
     });
   }, []);
   return (
@@ -29,6 +38,7 @@ const UpdateProduct = (props) => {
             <TextField
               label="Name:"
               fullWidth
+              // value={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -36,13 +46,23 @@ const UpdateProduct = (props) => {
             <TextField
               label="Price"
               fullWidth
+              // value={price}
               onChange={(e) => {
                 setPrice(e.target.value);
               }}
             />
             <TextField
+              label="Product Category:"
+              fullWidth
+              // value={category}
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
+            />
+            <TextField
               label="Quantity"
               fullWidth
+              // value={quantity}
               onChange={(e) => {
                 setQuantity(e.target.value);
               }}
@@ -56,10 +76,10 @@ const UpdateProduct = (props) => {
               color="primary"
               onClick={(e) => {
                 productService
-                  .updateProduct(id, { name, price, quantity })
+                  .updateProduct(id, { name, price, category, quantity })
                   .then(() => {
                     // console.log(data);
-                    props.history.push("/blog");
+                    props.history.push("/home/AllProducts");
                   })
                   .catch((err) => {
                     console.log(err);

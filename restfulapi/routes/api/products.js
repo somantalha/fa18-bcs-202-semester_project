@@ -4,6 +4,19 @@ const validateProduct = require("../../middlewares/validateProduct");
 const auth = require("../../middlewares/auth");
 const admin = require("../../middlewares/admin");
 var { Product } = require("../../models/product");
+const multer = require("multer");
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./uploads");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+
+// const upload = multer({ storage: storage });
+
 //get products
 // auth,
 router.get("/", async (req, res) => {
@@ -28,10 +41,12 @@ router.get("/:id", async (req, res) => {
   }
 });
 //update a record
-router.put("/:id", auth, admin, validateProduct, async (req, res) => {
+// auth, admin,
+router.put("/:id", validateProduct, async (req, res) => {
   let product = await Product.findById(req.params.id);
   product.name = req.body.name;
   product.price = req.body.price;
+  product.category = req.body.category;
   product.quantity = req.body.quantity;
   await product.save();
   return res.send(product);
@@ -42,15 +57,24 @@ router.delete("/:id", auth, admin, async (req, res) => {
   return res.send(product);
 });
 //Insert a record
-router.post("/", auth, admin, validateProduct, async (req, res) => {
-  let product = await Product.findOne({ name: req.body.name });
-  if (product)
-    return res.status(400).send("Product with same name already exist!");
-  product = new Product();
-  product.name = req.body.name;
-  product.price = req.body.price;
-  product.quantity = req.body.quantity;
-  await product.save();
-  return res.send(product);
-});
+// auth, admin,
+router.post(
+  "/",
+  validateProduct,
+  // upload.single("productImage"),
+  async (req, res) => {
+    console.log(req.file);
+    let product = await Product.findOne({ name: req.body.name });
+    if (product)
+      return res.status(400).send("Product with same name already exist!");
+    product = new Product();
+    product.name = req.body.name;
+    product.price = req.body.price;
+    product.category = req.body.category;
+    product.quantity = req.body.quantity;
+    // product.productImage = req.file.path;
+    await product.save();
+    return res.send(product);
+  }
+);
 module.exports = router;
