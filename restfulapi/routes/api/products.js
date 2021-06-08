@@ -11,10 +11,11 @@ const storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    // var ext = file.originalname.substr(file.originalname.lastIndexOf("."));
+    var ext = file.originalname.substr(file.originalname.lastIndexOf("."));
     cb(
       null,
-      new Date().ISOString().replace(/:/g, "-") + "-" + file.originalname
+      file.originalname
+      // new Date().ISOString().replace(/:/g, "-") + "-" + file.originalname
     );
   },
 });
