@@ -8,22 +8,23 @@ import Auth from "../auth/Auth";
 // var price = 0;
 // var category = "none";
 const UpdateProduct = (props) => {
-  const [name, setName] = React.useState();
-  const [price, setPrice] = React.useState();
-  const [quantity, setQuantity] = React.useState();
-  const [category, setCategory] = React.useState();
+  const [name, setName] = React.useState(" ");
+  const [price, setPrice] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(0);
+  const [category, setCategory] = React.useState(" ");
 
   // console.log(props.match.params.id);
   const id = props.match.params.id;
   React.useEffect(() => {
     productService.getSingleProduct(id).then((data) => {
-      // console.log(data.name);
+      console.log(data.name);
       // name = data.name;
       // quantity = data.quantity;
       // price = data.price;
-      setName(name);
-      setPrice(price);
-      setQuantity(quantity);
+      setName(data.name);
+      setPrice(data.price);
+      setCategory(data.category);
+      setQuantity(data.quantity);
     });
   }, []);
   return (
@@ -38,7 +39,7 @@ const UpdateProduct = (props) => {
             <TextField
               label="Name:"
               fullWidth
-              // value={name}
+              value={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -46,7 +47,7 @@ const UpdateProduct = (props) => {
             <TextField
               label="Price"
               fullWidth
-              // value={price}
+              value={price}
               onChange={(e) => {
                 setPrice(e.target.value);
               }}
@@ -54,7 +55,7 @@ const UpdateProduct = (props) => {
             <TextField
               label="Product Category:"
               fullWidth
-              // value={category}
+              value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
               }}
@@ -62,7 +63,7 @@ const UpdateProduct = (props) => {
             <TextField
               label="Quantity"
               fullWidth
-              // value={quantity}
+              value={quantity}
               onChange={(e) => {
                 setQuantity(e.target.value);
               }}

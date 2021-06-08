@@ -47,6 +47,7 @@ router.get("/:id", async (req, res) => {
 //update a record
 // auth, admin,
 router.put("/:id", validateProduct, async (req, res) => {
+  console.log(req.body);
   let product = await Product.findById(req.params.id);
   product.name = req.body.name;
   product.price = req.body.price;

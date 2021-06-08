@@ -6,24 +6,21 @@ import Admin from "../auth/Admin";
 import Auth from "../auth/Auth";
 
 const NewProduct = (props) => {
-  const [name, setName] = React.useState();
+  const [name, setName] = React.useState(" ");
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
-  const [category, setCategory] = React.useState();
-  // const [stateimg, setStateimg] = React.useState({});
+  const [category, setCategory] = React.useState(" ");
+  const [stateimg, setStateimg] = React.useState();
   // const [fd, setFd] = React.useState();
-  // setStateimg({
-  //   selectedFile: null,
-  // });
+  setStateimg({
+    productImage: null,
+  });
 
-  // const imageFileSelectHandler = (e) => {
-  //   setStateimg({
-  //     selectedFile: e.target.files[0],
-  //   });
-  //   setFd(new FormData());
-  //   setFd("productImage", stateimg.selectedFile, stateimg.selectedFile.name);
-  //   console.log(fd);
-  // };
+  const imageFileSelectHandler = (e) => {
+    setStateimg({
+      productImage: e.target.files[0],
+    });
+  };
 
   return (
     <Auth>
@@ -64,18 +61,7 @@ const NewProduct = (props) => {
             />
             <p> </p>
             <div>
-              <input
-                type="file"
-                // onChange={imageFileSelectHandler}
-              />
-
-              {/* <Button
-                variant="contained"
-                component="label"
-                onClick={fileUploadHandler}
-              >
-                Upload File
-              </Button> */}
+              <input type="file" onChange={imageFileSelectHandler} />
             </div>
           </Grid>
           <Grid item xs={3}></Grid>
@@ -85,13 +71,16 @@ const NewProduct = (props) => {
               variant="contained"
               color="primary"
               onClick={(e) => {
+                e.preventDefault();
+                const formData = new FormData();
+                formData.append("name", name);
+                formData.append("price", price);
+                formData.append("category", category);
+                formData.append("quantity", quantity);
+                formData.append("productImage", stateimg.productImage);
                 productService
                   .addProduct({
-                    name,
-                    price,
-                    category,
-                    quantity,
-                    //  fd
+                    formData,
                   })
                   .then((data) => {
                     console.log(data);
