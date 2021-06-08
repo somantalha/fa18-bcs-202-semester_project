@@ -27,7 +27,7 @@ const NewProduct = (props) => {
   return (
     <Auth>
       <Admin>
-        <Grid container spacing={3}>
+        <Grid container spacing={20}>
           <Grid item xs={12}>
             <h1>Add New Product:</h1>
           </Grid>
@@ -36,8 +36,15 @@ const NewProduct = (props) => {
             // onSubmit={this.onSubmit}
             onSubmit={(e) => {
               e.preventDefault();
-              const formData = new FormData();
+              // console.log(e.target);
+              let myForm = e.target;
+              const formData = new FormData(myForm);
               console.log(formData);
+              // formData.append("name", e.name);
+              // formData.append("price", e.price);
+              // formData.append("category", e.category);
+              // formData.append("quantity", e.quantity);
+              // formData.append("productImage", stateimg.productImage);
               formData.append("name", name);
               formData.append("price", price);
               formData.append("category", category);
@@ -58,76 +65,84 @@ const NewProduct = (props) => {
                 });
             }}
           >
+            {/* <Grid item xs={3}></Grid>
+            <Grid item xs={6}> */}
+            <TextField
+              label="Name:"
+              name="name"
+              fullWidth
+              className="form-group"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <TextField
+              label="Price"
+              name="price"
+              fullWidth
+              className="form-group"
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+            <TextField
+              label="Product Category:"
+              name="category"
+              fullWidth
+              className="form-group"
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
+            />
+            <TextField
+              label="Quantity"
+              name="quantity"
+              fullWidth
+              className="form-group"
+              onChange={(e) => {
+                setQuantity(e.target.value);
+              }}
+            />
+            <p> </p>
+            <div className="form-group">
+              <input
+                type="file"
+                name="productImage"
+                onChange={imageFileSelectHandler}
+              />
+            </div>
+            {/* </Grid>
             <Grid item xs={3}></Grid>
-            <Grid item xs={6}>
-              <TextField
-                label="Name:"
-                fullWidth
-                className="form-group"
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <TextField
-                label="Price"
-                fullWidth
-                className="form-group"
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                }}
-              />
-              <TextField
-                label="Product Category:"
-                fullWidth
-                className="form-group"
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              />
-              <TextField
-                label="Quantity"
-                fullWidth
-                className="form-group"
-                onChange={(e) => {
-                  setQuantity(e.target.value);
-                }}
-              />
-              <p> </p>
-              <div className="form-group">
-                <input type="file" onChange={imageFileSelectHandler} />
-              </div>
-            </Grid>
             <Grid item xs={3}></Grid>
-            <Grid item xs={3}></Grid>
-            <Grid item xs={9}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                // onClick={(e) => {
-                //   e.preventDefault();
-                //   const formData = new FormData();
-                //   formData.append("name", name);
-                //   formData.append("price", price);
-                //   formData.append("category", category);
-                //   formData.append("quantity", quantity);
-                //   formData.append("productImage", stateimg.productImage);
-                //   productService
-                //     .addProduct({
-                //       formData,
-                //     })
-                //     .then((data) => {
-                //       console.log(data);
-                //       props.history.push("/home/AllProducts");
-                //     })
-                //     .catch((err) => {
-                //       console.log(err);
-                //     });
-                // }}
-              >
-                Add This
-              </Button>
-            </Grid>
+            <Grid item xs={9}> */}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   const formData = new FormData();
+              //   formData.append("name", name);
+              //   formData.append("price", price);
+              //   formData.append("category", category);
+              //   formData.append("quantity", quantity);
+              //   formData.append("productImage", stateimg.productImage);
+              //   productService
+              //     .addProduct({
+              //       formData,
+              //     })
+              //     .then((data) => {
+              //       console.log(data);
+              //       props.history.push("/home/AllProducts");
+              //     })
+              //     .catch((err) => {
+              //       console.log(err);
+              //     });
+              // }}
+            >
+              Add This
+            </Button>
+            {/* </Grid> */}
           </form>
         </Grid>
       </Admin>

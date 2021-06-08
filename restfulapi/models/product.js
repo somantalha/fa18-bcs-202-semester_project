@@ -7,7 +7,7 @@ var productSchema = mongoose.Schema({
   quantity: { type: Number, required: true },
   productImage: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 var Product = mongoose.model("Product", productSchema);
