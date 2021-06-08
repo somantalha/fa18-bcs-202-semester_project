@@ -10,6 +10,20 @@ const NewProduct = (props) => {
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
   const [category, setCategory] = React.useState();
+  // const [stateimg, setStateimg] = React.useState({});
+  // const [fd, setFd] = React.useState();
+  // setStateimg({
+  //   selectedFile: null,
+  // });
+
+  // const imageFileSelectHandler = (e) => {
+  //   setStateimg({
+  //     selectedFile: e.target.files[0],
+  //   });
+  //   setFd(new FormData());
+  //   setFd("productImage", stateimg.selectedFile, stateimg.selectedFile.name);
+  //   console.log(fd);
+  // };
 
   return (
     <Auth>
@@ -49,10 +63,20 @@ const NewProduct = (props) => {
               }}
             />
             <p> </p>
-            <Button variant="contained" component="label">
-              Upload File
-              <input type="file" hidden />
-            </Button>
+            <div>
+              <input
+                type="file"
+                // onChange={imageFileSelectHandler}
+              />
+
+              {/* <Button
+                variant="contained"
+                component="label"
+                onClick={fileUploadHandler}
+              >
+                Upload File
+              </Button> */}
+            </div>
           </Grid>
           <Grid item xs={3}></Grid>
           <Grid item xs={3}></Grid>
@@ -62,7 +86,13 @@ const NewProduct = (props) => {
               color="primary"
               onClick={(e) => {
                 productService
-                  .addProduct({ name, price, category, quantity })
+                  .addProduct({
+                    name,
+                    price,
+                    category,
+                    quantity,
+                    //  fd
+                  })
                   .then((data) => {
                     console.log(data);
                     props.history.push("/home/AllProducts");

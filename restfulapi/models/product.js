@@ -5,10 +5,10 @@ var productSchema = mongoose.Schema({
   price: { type: Number, required: true },
   category: { type: String, required: true },
   quantity: { type: Number, required: true },
-  // productImage: {
-  //   type: String,
-  //   required: true,
-  // },
+  productImage: {
+    type: String,
+    required: true,
+  },
 });
 var Product = mongoose.model("Product", productSchema);
 

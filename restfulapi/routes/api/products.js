@@ -6,16 +6,20 @@ const admin = require("../../middlewares/admin");
 var { Product } = require("../../models/product");
 const multer = require("multer");
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./uploads");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   },
-// });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    // var ext = file.originalname.substr(file.originalname.lastIndexOf("."));
+    cb(
+      null,
+      new Date().ISOString().replace(/:/g, "-") + "-" + file.originalname
+    );
+  },
+});
 
-// const upload = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 //get products
 // auth,
@@ -60,19 +64,27 @@ router.delete("/:id", auth, admin, async (req, res) => {
 // auth, admin,
 router.post(
   "/",
+  upload.single("productImage"),
   validateProduct,
-  // upload.single("productImage"),
   async (req, res) => {
     console.log(req.file);
+    console.log(req.body);
+    // const error = new Error("Please choose image file!");
+    // const file = req.file;
     let product = await Product.findOne({ name: req.body.name });
     if (product)
       return res.status(400).send("Product with same name already exist!");
+    // if (!file) {
+    //   error.httpStatusCode = 400;
+    //   return error;
+    // }
+
     product = new Product();
     product.name = req.body.name;
     product.price = req.body.price;
     product.category = req.body.category;
     product.quantity = req.body.quantity;
-    // product.productImage = req.file.path;
+    product.productImage = req.file.path;
     await product.save();
     return res.send(product);
   }
