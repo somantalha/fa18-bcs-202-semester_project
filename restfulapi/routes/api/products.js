@@ -67,10 +67,11 @@ router.delete("/:id", auth, admin, async (req, res) => {
 router.post(
   "/",
   upload.single("productImage"),
-  validateProduct,
+  // validateProduct,
   async (req, res) => {
     console.log(req.file);
     console.log(req.body);
+    const url = req.protocol + "://" + req.get("host");
     // const error = new Error("Please choose image file!");
     // const file = req.file;
     let product = await Product.findOne({ name: req.body.name });
@@ -86,8 +87,25 @@ router.post(
     product.price = req.body.price;
     product.category = req.body.category;
     product.quantity = req.body.quantity;
-    product.productImage = req.file.path;
-    await product.save();
+    product.productImage = url + "/public/" + req.file.filename;
+    // req.file.path;
+    await product
+      .save()
+      .then((result) => {
+        res.status(201).json({
+          message: "User registered successfully!",
+          userCreated: {
+            // _id: result._id,
+            productImage: result.productImage,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err),
+          res.status(500).json({
+            error: err,
+          });
+      });
     return res.send(product);
   }
 );

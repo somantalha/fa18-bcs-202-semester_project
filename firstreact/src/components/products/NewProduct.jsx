@@ -5,18 +5,15 @@ import productService from "../../services/ProductService";
 import Admin from "../auth/Admin";
 import Auth from "../auth/Auth";
 
+var check;
 const NewProduct = (props) => {
   const [name, setName] = React.useState(" ");
   const [price, setPrice] = React.useState(0);
   const [quantity, setQuantity] = React.useState(0);
   const [category, setCategory] = React.useState(" ");
   const [stateimg, setStateimg] = React.useState({
-    ProductImage: " ",
+    ProductImage: "",
   });
-  // const [fd, setFd] = React.useState();
-  // setStateimg({
-  //   productImage: null,
-  // });
 
   const imageFileSelectHandler = (e) => {
     setStateimg({
@@ -33,30 +30,54 @@ const NewProduct = (props) => {
           </Grid>
           <form
             className="justify-content-center "
-            // onSubmit={this.onSubmit}
             onSubmit={(e) => {
               e.preventDefault();
               // console.log(e.target);
-              let myForm = e.target;
-              const formData = new FormData(myForm);
-              console.log(formData);
+              // console.log(name);
+
+              // let myForm = e.target;
+              const formData = new FormData();
+              // myForm
+              for (var key of formData.entries()) {
+                console.log(key[0] + ", " + key[1]);
+              }
+              // console.log(formData);
               // formData.append("name", e.name);
               // formData.append("price", e.price);
               // formData.append("category", e.category);
               // formData.append("quantity", e.quantity);
               // formData.append("productImage", stateimg.productImage);
-              formData.append("name", name);
-              formData.append("price", price);
-              formData.append("category", category);
-              formData.append("quantity", quantity);
+              formData.append(
+                "name",
+                name
+                // "wwtyewds"
+              );
+              formData.append(
+                "price",
+                price
+                // "231"
+              );
+              formData.append(
+                "category",
+                category
+                // "qwerty"
+              );
+              formData.append(
+                "quantity",
+                quantity
+                // "543"
+              );
               formData.append("productImage", stateimg.productImage);
-              console.log(formData);
-
+              // console.log(formData);
+              for (var key of formData.entries()) {
+                // console.log(key[0] + ", " + key[1]);
+                console.log(key[1]);
+              }
+              // var options = { formData };
               productService
-                .addProduct({
-                  formData,
-                })
+                .addProduct(formData)
                 .then((data) => {
+                  console.log(" in .then");
                   console.log(data);
                   props.history.push("/home/AllProducts");
                 })
