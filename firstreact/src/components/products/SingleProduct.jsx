@@ -9,7 +9,68 @@ const SingleProduct = (props) => {
   const { product, onDelete, history } = props;
   return (
     <Grid item xs={4}>
-      <h2>
+      <div class="card" style={{ width: "18rem" }}>
+        <p>
+          <strong>Product Image </strong>
+          <img src={product.productImage} width="100px" />
+        </p>
+        {/* <img
+          class="card-img-top"
+          src={product.productImage}
+          alt="Card image cap"
+        /> */}
+        <div class="card-body">
+          <h5 class="card-title">
+            <h2>
+              <strong>Name:</strong> {product.name}
+            </h2>
+          </h5>
+          <p>
+            <strong>Price: </strong>
+            {product.price}{" "}
+          </p>
+          <p>
+            <strong>Product Category: </strong>
+            {product.category}
+          </p>
+          {userService.isAdmin() && (
+            <>
+              <p>
+                <strong>Quantity: </strong>
+                {product.quantity}{" "}
+              </p>{" "}
+              <hr />
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={(e) => {
+                  productService
+                    .deleteProduct(product._id)
+                    .then((data) => {
+                      console.log(data);
+                      onDelete();
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
+                Delete
+              </Button>{" "}
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={(e) => {
+                  history.push("/update/" + product._id);
+                }}
+              >
+                Edit
+              </Button>
+            </>
+          )}
+        </div>
+      </div>
+      {/* <h2>
         <strong>Name:</strong> {product.name}
       </h2>
       <p>
@@ -20,10 +81,10 @@ const SingleProduct = (props) => {
         <strong>Product Category: </strong>
         {product.category}
       </p>
-      {/* <div>
-        <img id="imgsize" src="../../task_1/s4.jpg" alt="Men" width="100%" />
-        <div className="centertext">Brown three piece</div>
-      </div>{" "} */}
+      <p>
+        <strong>Product Image </strong>
+        <img src={product.productImage} width="100px" />
+      </p>
       {userService.isAdmin() && (
         <>
           <p>
@@ -58,7 +119,7 @@ const SingleProduct = (props) => {
           </Button>
         </>
       )}
-      <hr />
+      <hr /> */}
     </Grid>
   );
 };

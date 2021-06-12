@@ -59,6 +59,39 @@ const Products = (props) => {
             {products.map((product, index) => (
               <SingleProduct key={index} product={product} onDelete={getData} />
             ))}
+
+            {/* <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Picture</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((p, index) => (
+                  <tr key={index}>
+                    <td>{p.name}</td>
+                    <td>{p.price}</td>
+                    <td>
+                      <img src={p.productImage} width="100px" alt="img" />
+                    </td>
+                    <td>
+                      <button
+                        className="btn btn-warning mr-2"
+                        onClick={(e) => {}}
+                      >
+                        Edit
+                      </button>
+                      <button className="btn btn-danger" onClick={(e) => {}}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table> */}
           </Grid>
         )}
         <Grid items xs={12}>

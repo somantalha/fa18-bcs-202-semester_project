@@ -35,9 +35,25 @@ const BlogInspiringWays = () => {
       <div className="container">
         <div className="row">
           <div className="col-9">
-            <div
+            {/* <div
               className="card blogimg1"
               // id="blogimg1"
+              style={{
+                width: "50rem",
+                height: "30rem",
+              }}
+            >
+              <div className="inner">
+                <img
+                  className="card-img-top "
+                  src="./task_1/blog1.jpg"
+                  alt="Card image cap"
+                />
+              </div>
+            </div> */}
+            <div
+              className="card blogimg1"
+              // id=""
               style={{
                 width: "50rem",
                 height: "30rem",

@@ -8,7 +8,8 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads");
+    // cb(null, "./uploads");
+    cb(null, "./public");
   },
   filename: function (req, file, cb) {
     var ext = file.originalname.substr(file.originalname.lastIndexOf("."));
@@ -66,12 +67,14 @@ router.delete("/:id", auth, admin, async (req, res) => {
 // auth, admin,
 router.post(
   "/",
+  auth,
+  admin,
   upload.single("productImage"),
-  // validateProduct,
+  validateProduct,
   async (req, res) => {
     console.log(req.file);
     console.log(req.body);
-    const url = req.protocol + "://" + req.get("host");
+    // const url = req.protocol + "://" + req.get("host");
     // const error = new Error("Please choose image file!");
     // const file = req.file;
     let product = await Product.findOne({ name: req.body.name });
@@ -87,15 +90,15 @@ router.post(
     product.price = req.body.price;
     product.category = req.body.category;
     product.quantity = req.body.quantity;
-    product.productImage = url + "/public/" + req.file.filename;
+    product.productImage = req.file.filename;
+    // url + "/public/" + req.file.filename;
     // req.file.path;
     await product
       .save()
       .then((result) => {
         res.status(201).json({
-          message: "User registered successfully!",
+          message: " successfull!",
           userCreated: {
-            // _id: result._id,
             productImage: result.productImage,
           },
         });
