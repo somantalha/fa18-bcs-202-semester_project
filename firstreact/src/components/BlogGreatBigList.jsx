@@ -47,7 +47,7 @@ const BlogGreatBigList = () => {
               <div className="inner">
                 <img
                   className="card-img-top "
-                  src="./task_1/blog2.jpg"
+                  src="/task_1/blog2.jpg"
                   alt="Card image cap"
                 />
               </div>

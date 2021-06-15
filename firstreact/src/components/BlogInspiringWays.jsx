@@ -62,7 +62,7 @@ const BlogInspiringWays = () => {
               <div className="inner">
                 <img
                   className="card-img-top "
-                  src="./task_1/blog1.jpg"
+                  src="/task_1/blog1.jpg"
                   alt="Card image cap"
                 />
               </div>

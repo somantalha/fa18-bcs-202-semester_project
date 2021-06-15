@@ -37,6 +37,8 @@ import Contact from "./components/contact";
 import BlogInspiringWays from "./components/BlogInspiringWays";
 import BlogGreatBigList from "./components/BlogGreatBigList";
 import BlogWintertoSpringFashion from "./components/BlogWinter-to-SpringFashion";
+import Accessories from "./components/products/Accessories";
+import AddToCart from "./components/AddToCart";
 function App() {
   return (
     <Router>
@@ -44,12 +46,14 @@ function App() {
         <ToastContainer />
         <MenuNavbar />
         <Switch>
+          <Route path="/AddToCart" component={AddToCart} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/home/AllProducts/:page?" component={AllProducts} />
           <Route path="/home/Shoes" component={Shoes} />
           <Route path="/home/Watches" component={Watches} />
           <Route path="/home/Bags" component={Bags} />
+          <Route path="/home/Accessories" component={Accessories} />
           <Route path="/home/Women" component={Women} />
           <Route path="/home/Men" component={Men} />
           <Route path="/home" component={homepage} />

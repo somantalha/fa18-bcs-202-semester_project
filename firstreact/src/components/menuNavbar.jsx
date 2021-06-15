@@ -89,7 +89,21 @@ const MenuNavbar = () => {
                       window.location.reload();
                     }}
                   >
-                    Log out {userService.getLoggedInUser.name}
+                    Log out
+                    {/* {userService.getLoggedInUser.name} */}
+                    <p> {userService.getLoggedInUser.name} </p>
+                  </Link>
+                </li>
+                <li className="nav-item " style={{ padding: "9px" }}>
+                  <Link
+                    className="nav-link "
+                    id="clr"
+                    // onClick={(e) => {
+                    //   history.push("/features");
+                    // }}
+                    to="/features"
+                  >
+                    Shopping Cart
                   </Link>
                 </li>
               </>

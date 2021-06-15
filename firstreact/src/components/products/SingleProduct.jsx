@@ -1,4 +1,4 @@
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Link } from "@material-ui/core";
 import React from "react";
 import { withRouter } from "react-router";
 import productService from "../../services/ProductService";
@@ -33,6 +33,8 @@ const SingleProduct = (props) => {
             <strong>Product Category: </strong>
             {product.category}
           </p>
+          {/* <hr /> */}
+
           {userService.isAdmin() && (
             <>
               <p>
@@ -65,6 +67,26 @@ const SingleProduct = (props) => {
                 }}
               >
                 Edit
+              </Button>
+            </>
+          )}
+          {userService.isLoggedIn() && (
+            <>
+              <Button
+                variant="contained"
+                style={{
+                  background: "black",
+                  color: "white",
+                  marginTop: "5px",
+                }}
+                onClick={(e) => {
+                  history.push({
+                    pathname: "/features",
+                    // state: { detail: },
+                  });
+                }}
+              >
+                Add To Cart
               </Button>
             </>
           )}

@@ -39,8 +39,15 @@ const Products = (props) => {
       });
   };
   React.useEffect(getData, [page, perPage]);
-  // const handleNewProduct= ()=>{
 
+  // const handleCondition = () => {
+  //   {
+  //     products.map((product, index) => (
+  //       // if(product.category == "women"):
+
+  //       // <SingleProduct key={index} product={product} onDelete={getData} />
+  //     ));
+  //   }
   // };
 
   return (
@@ -57,6 +64,7 @@ const Products = (props) => {
         ) : (
           <Grid container spacing={3}>
             {products.map((product, index) => (
+              // if(product.category == "women"):
               <SingleProduct key={index} product={product} onDelete={getData} />
             ))}
 
@@ -105,8 +113,18 @@ const Products = (props) => {
               props.history.push("/home/AllProducts/" + value);
             }}
           />
-          Total produts: {total} Showing {(page - 1) * perPage + 1} to{" "}
-          {(page - 1) * perPage + products.length}
+          <p>Total produts: {total}</p>
+          <div className="row">
+            <p style={{ paddingRight: "5px" }}>Showing:</p>{" "}
+            {total === 0 ? (
+              0
+            ) : (
+              <p>
+                {(page - 1) * perPage + 1} to{" "}
+                {(page - 1) * perPage + products.length}{" "}
+              </p>
+            )}
+          </div>
         </Grid>
       </div>
     </div>

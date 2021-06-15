@@ -47,7 +47,7 @@ const BlogWintertoSpringFashion = () => {
               <div className="inner">
                 <img
                   className="card-img-top "
-                  src="./task_1/blog3.jpg"
+                  src="/task_1/blog3.jpg"
                   alt="Card image cap"
                 />
               </div>
