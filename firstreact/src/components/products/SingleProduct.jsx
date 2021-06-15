@@ -12,7 +12,10 @@ const SingleProduct = (props) => {
       <div class="card" style={{ width: "18rem" }}>
         <p>
           <strong>Product Image </strong>
-          <img src={product.productImage} width="100px" />
+          <img
+            src={"http://localhost:4000/" + product.productImage}
+            width="100px"
+          />
         </p>
         {/* <img
           class="card-img-top"
