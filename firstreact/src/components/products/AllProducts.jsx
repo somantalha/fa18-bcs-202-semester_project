@@ -1,12 +1,20 @@
 import React from "react";
-import { Button, Form, FormControl } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Products from "./products";
 const AllProducts = () => {
   return (
-    <div>
-      <Products />
-    </div>
+    <>
+      <div className="blogcover">
+        <h1>All Products</h1>
+        <img
+          className="img-responsive "
+          src="../../task_1/blog-cover.jpg"
+          alt="Clothes"
+        />
+      </div>
+      <div className="container">
+        <Products />
+      </div>
+    </>
   );
 };
 

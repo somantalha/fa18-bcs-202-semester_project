@@ -30,67 +30,72 @@ const UpdateProduct = (props) => {
   return (
     <Auth>
       <Admin>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <h1>Update Product:</h1>
+        <Grid container spacing={20} justify="center">
+          <Grid spacing={3}>
+            <Grid item xs={12}>
+              <h1>Update Product:</h1>
+            </Grid>
+            <br />
+            <Grid item xs={3}></Grid>
+            <Grid item xs={6}>
+              <TextField
+                label="Name:"
+                fullWidth
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <TextField
+                label="Price"
+                fullWidth
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+              <TextField
+                label="Product Category:"
+                fullWidth
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
+              />
+              <TextField
+                label="Quantity"
+                fullWidth
+                value={quantity}
+                onChange={(e) => {
+                  setQuantity(e.target.value);
+                }}
+              />
+            </Grid>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={3}></Grid>
+            <br />
+            <Grid item xs={9}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={(e) => {
+                  productService
+                    .updateProduct(id, { name, price, category, quantity })
+                    .then(() => {
+                      // console.log(data);
+                      props.history.push("/home/AllProducts");
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                }}
+              >
+                Update
+              </Button>
+            </Grid>
+            <br />
+            <Grid item xs={3}></Grid>
           </Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={6}>
-            <TextField
-              label="Name:"
-              fullWidth
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <TextField
-              label="Price"
-              fullWidth
-              value={price}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-            />
-            <TextField
-              label="Product Category:"
-              fullWidth
-              value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }}
-            />
-            <TextField
-              label="Quantity"
-              fullWidth
-              value={quantity}
-              onChange={(e) => {
-                setQuantity(e.target.value);
-              }}
-            />
-          </Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={9}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={(e) => {
-                productService
-                  .updateProduct(id, { name, price, category, quantity })
-                  .then(() => {
-                    // console.log(data);
-                    props.history.push("/home/AllProducts");
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                  });
-              }}
-            >
-              Update
-            </Button>
-          </Grid>
-          <Grid item xs={3}></Grid>
         </Grid>
       </Admin>
     </Auth>

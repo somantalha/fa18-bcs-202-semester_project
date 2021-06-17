@@ -1,12 +1,13 @@
 import React from "react";
-import SingleProduct from "./SingleProduct";
+import AllInOnePRoducts from "./AllInOnePRoducts";
 import { Fab, Grid, makeStyles } from "@material-ui/core";
+import { Button, Form, FormControl } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import Pagination from "@material-ui/lab/Pagination";
 import productService from "../../services/ProductService";
 import userService from "../../services/UserService";
 import { withRouter } from "react-router";
-// import PropTypes from "prop-types";
 const useStyles = makeStyles((theme) => ({
   addBtn: {
     margin: 0,
@@ -17,16 +18,17 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
   },
 }));
-
 const Products = (props) => {
   console.log(props);
+  const handleNewProduct = () => {
+    console.log(props);
+    props.history.push("/addnew");
+  };
   const [products, setProducts] = React.useState([]);
   const [total, setTotal] = React.useState(0);
   const [perPage, setPerPage] = React.useState(9);
   const classes = useStyles();
-  // const page = props.match.params.page ? props.match.params.page : 1;
   const page = props.match?.params?.page || 1;
-  // const page = 1;
   const getData = () => {
     productService
       .getProduct(page, perPage)
@@ -40,21 +42,59 @@ const Products = (props) => {
   };
   React.useEffect(getData, [page, perPage]);
 
-  // const handleCondition = () => {
-  //   {
-  //     products.map((product, index) => (
-  //       // if(product.category == "women"):
-
-  //       // <SingleProduct key={index} product={product} onDelete={getData} />
-  //     ));
-  //   }
-  // };
-
   return (
     <div>
-      <h1>Products List:</h1>
+      <div>
+        <ul className="list-inline">
+          <li className="list-inline-item">
+            <Link className="nav-link active" id="clr" to="/home/AllProducts">
+              All ptoducts
+            </Link>
+          </li>
+          <li className="list-inline-item">
+            <Link className="nav-link active" id="clr" to="/home/Women">
+              Women
+            </Link>
+          </li>
+          <li className="list-inline-item">
+            <Link className="nav-link active" id="clr" to="/home/Men">
+              Men
+            </Link>
+          </li>
+          <li className="list-inline-item">
+            <Link className="nav-link active" id="clr" to="/home/Bags">
+              Bag
+            </Link>
+          </li>
+          <li className="list-inline-item">
+            <Link className="nav-link active" id="clr" to="/home/Shoes">
+              Shoes
+            </Link>
+          </li>
+          <li className="list-inline-item">
+            <Link className="nav-link active" id="clr" to="/home/Watches">
+              Watches
+            </Link>
+          </li>
+          <li className="list-inline-item pull-right">
+            <Form inline>
+              <FormControl
+                type="text"
+                placeholder="Search"
+                className="mr-sm-2"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+          </li>
+        </ul>
+      </div>
       {userService.isAdmin() && (
-        <Fab color="primary" aria-label="add" className={classes.addBtn}>
+        <Fab
+          color="primary"
+          aria-label="add"
+          className={classes.addBtn}
+          onClick={handleNewProduct}
+        >
           <AddIcon />
         </Fab>
       )}
@@ -64,42 +104,12 @@ const Products = (props) => {
         ) : (
           <Grid container spacing={3}>
             {products.map((product, index) => (
-              // if(product.category == "women"):
-              <SingleProduct key={index} product={product} onDelete={getData} />
+              <AllInOnePRoducts
+                key={index}
+                product={product}
+                onDelete={getData}
+              />
             ))}
-
-            {/* <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Picture</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((p, index) => (
-                  <tr key={index}>
-                    <td>{p.name}</td>
-                    <td>{p.price}</td>
-                    <td>
-                      <img src={p.productImage} width="100px" alt="img" />
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-warning mr-2"
-                        onClick={(e) => {}}
-                      >
-                        Edit
-                      </button>
-                      <button className="btn btn-danger" onClick={(e) => {}}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table> */}
           </Grid>
         )}
         <Grid items xs={12}>

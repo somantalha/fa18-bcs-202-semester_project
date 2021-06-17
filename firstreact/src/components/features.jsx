@@ -12,6 +12,7 @@
 // export default Features;
 
 import React from "react";
+import { useCookies } from "react-cookie";
 import {
   makeStyles,
   Button,
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Features = (props) => {
+  const [cookies, setCookie] = useCookies(["user"]);
   console.log(props);
   const [qnty, setQnty] = React.useState(1);
 
@@ -74,6 +76,7 @@ const Features = (props) => {
         marginTop: "10em",
       }}
     >
+      {cookies.user && <p>{cookies.user}</p>}
       <div className="row">
         {cartItems.length === 0 ? (
           <>

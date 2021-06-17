@@ -60,11 +60,11 @@ const MenuNavbar = () => {
                 About
               </Link>
             </li>
-            <li className="nav-item" style={{ padding: "9px" }}>
+            {/* <li className="nav-item" style={{ padding: "9px" }}>
               <Link className="nav-link " id="clr" to="/addnew">
                 Add new product
               </Link>
-            </li>
+            </li> */}
             {!userService.isLoggedIn() ? (
               <>
                 <li className="nav-item" style={{ padding: "9px" }}>

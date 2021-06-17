@@ -50,12 +50,12 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/home/AllProducts/:page?" component={AllProducts} />
-          <Route path="/home/Shoes" component={Shoes} />
-          <Route path="/home/Watches" component={Watches} />
-          <Route path="/home/Bags" component={Bags} />
+          <Route path="/home/Shoes/:page?" component={Shoes} />
+          <Route path="/home/Watches/:page?" component={Watches} />
+          <Route path="/home/Bags/:page?" component={Bags} />
           <Route path="/home/Accessories" component={Accessories} />
-          <Route path="/home/Women" component={Women} />
-          <Route path="/home/Men" component={Men} />
+          <Route path="/home/Women/:page?" component={Women} />
+          <Route path="/home/Men/:page?" component={Men} />
           <Route path="/home" component={homepage} />
           <Route path="/Shop" component={Shop} />
           <Route path="/addnew" component={NewProduct} />
