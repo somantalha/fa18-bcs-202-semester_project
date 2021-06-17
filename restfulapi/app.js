@@ -10,11 +10,19 @@ var usersRouter = require("./routes/api/users");
 var productsRouter = require("./routes/api/products");
 var config = require("config");
 var app = express();
+
 app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, "firstreact/build")));
+// Anything that doesn't match the above, send back index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/firstreact/build/index.html"));
+});
 
 app.use(logger("dev"));
 app.use(express.json());
