@@ -18,11 +18,12 @@ const AccessoriesGet = (props) => {
   return (
     <Grid item xs={4}>
       {(product?.category === "shoes" || product?.category === "watches") && (
-        <div className="card" style={{ width: "18rem" }}>
+        <div className="card" style={{ width: "15rem", height: "40rem" }}>
           <p>
             <img
               src={"http://localhost:4000/" + product.productImage}
               width="100%"
+              style={{ height: "20rem" }}
             />
           </p>
           <div className="card-body">

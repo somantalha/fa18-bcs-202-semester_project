@@ -112,9 +112,10 @@ const Products = (props) => {
             ))}
           </Grid>
         )}
-        <Grid items xs={12}>
+        <Grid items xs={12} style={{ alignItems: "center" }}>
           <Pagination
             count={Math.ceil(total / perPage)}
+            style={{ marginTop: "2rem" }}
             variant="outlined"
             shape="rounded"
             onChange={(e, value) => {

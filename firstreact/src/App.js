@@ -53,10 +53,10 @@ function App() {
           <Route path="/home/Shoes/:page?" component={Shoes} />
           <Route path="/home/Watches/:page?" component={Watches} />
           <Route path="/home/Bags/:page?" component={Bags} />
-          <Route path="/home/Accessories" component={Accessories} />
+          <Route path="/home/Accessories/:page" component={Accessories} />
           <Route path="/home/Women/:page?" component={Women} />
           <Route path="/home/Men/:page?" component={Men} />
-          <Route path="/home" component={homepage} />
+          <Route path="/home/:page?" component={homepage} />
           <Route path="/Shop" component={Shop} />
           <Route path="/addnew" component={NewProduct} />
           <Route path="/update/:id" component={UpdateProduct} />
@@ -71,7 +71,7 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/about" component={about} />
           <Route path="/Not-Found" exact component={NotFound} />
-          <Route path="/" exact component={landingpage} />
+          <Route path="/:page?" exact component={landingpage} />
           <Redirect to="/Not-Found" />
         </Switch>
         <Footercomp />

@@ -3,7 +3,7 @@ import { Link, makeStyles } from "@material-ui/core";
 const ProductCategories = () => {
   return (
     <div className="container">
-      <div className="row">
+      <div className="row" style={{ marginBottom: "3rem" }}>
         <div className="col-md-4">
           <Link
             href="/home/Women"

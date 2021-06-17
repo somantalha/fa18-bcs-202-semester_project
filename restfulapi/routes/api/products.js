@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
     cb(null, "./public");
   },
   filename: function (req, file, cb) {
-    var ext = file.originalname.substr(file.originalname.lastIndexOf("."));
+    // var ext = file.originalname.substr(file.originalname.lastIndexOf("."));
     cb(
       null,
       file.originalname

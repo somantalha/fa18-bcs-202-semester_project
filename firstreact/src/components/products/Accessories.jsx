@@ -295,12 +295,13 @@ const Men = (props) => {
         <Grid items xs={12}>
           <Pagination
             count={Math.ceil(total / perPage)}
+            style={{ marginTop: "2rem" }}
             variant="outlined"
             shape="rounded"
             onChange={(e, value) => {
               console.log(value);
               console.log(props);
-              props.history.push("/home/Men/" + value);
+              props.history.push("/home/Accessories/" + value);
             }}
           />
           <p>Total produts: {total}</p>

@@ -225,7 +225,7 @@ const Women = (props) => {
               onChange={(e, value) => {
                 console.log(value);
                 console.log(props);
-                props.history.push("/home/Watches/" + value);
+                props.history.push("/home/Women/" + value);
               }}
             />
             <p>Total produts: {total}</p>

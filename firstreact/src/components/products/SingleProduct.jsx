@@ -18,11 +18,12 @@ const SingleProduct = (props) => {
   return (
     <Grid item xs={4}>
       {/* {product?.category === value && ( */}
-      <div className="card" style={{ width: "18rem" }}>
+      <div className="card" style={{ width: "15rem", height: "40rem" }}>
         <p>
           <img
             src={"http://localhost:4000/" + product.productImage}
             width="100%"
+            style={{ height: "20rem" }}
           />
         </p>
         <div className="card-body">
@@ -47,6 +48,7 @@ const SingleProduct = (props) => {
               </p>{" "}
               <hr />
               <Button
+                size="small"
                 variant="contained"
                 color="secondary"
                 onClick={(e) => {
@@ -64,6 +66,7 @@ const SingleProduct = (props) => {
                 Delete
               </Button>{" "}
               <Button
+                size="small"
                 variant="contained"
                 color="primary"
                 onClick={(e) => {
@@ -77,6 +80,7 @@ const SingleProduct = (props) => {
           {userService.isLoggedIn() && (
             <>
               <Button
+                size="small"
                 variant="contained"
                 style={{
                   background: "black",
