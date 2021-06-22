@@ -26,12 +26,21 @@ const upload = multer({ storage: storage });
 //get products
 // auth,
 router.get("/", async (req, res) => {
-  console.log(req.user);
+  console.log(req.query);
+  let category = req.query?.category !== "undefined" ? req.query.category : "";
   let page = Number(req.query.page ? req.query.page : 1);
   let perPage = Number(req.query.perPage ? req.query.perPage : 8);
   let skipRecords = perPage * (page - 1);
-  let products = await Product.find().skip(skipRecords).limit(perPage);
-  let total = await Product.countDocuments();
+  let filter = category ? { category: category } : {};
+  console.log(filter);
+  let products = await Product.find(filter).skip(skipRecords).limit(perPage);
+  let total;
+  if (!category) {
+    total = await Product.countDocuments();
+  } else {
+    total = products.length;
+  }
+  console.log("total", category);
   return res.send({ total, products });
 });
 //get single products

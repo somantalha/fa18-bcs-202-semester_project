@@ -9,8 +9,10 @@ class ProductsService extends GenericService {
 
   updateProduct = (id, data) => this.put("products/" + id, data);
 
-  getProduct = (page = 1, perPage = 8) =>
-    this.get("products?page=" + page + "&perPage=" + perPage);
+  getProduct = (page = 1, perPage = 8, category) =>
+    this.get(
+      "products?page=" + page + "&perPage=" + perPage + "&category=" + category
+    );
 
   getSingleProduct = (id) => this.get("products/" + id);
 }

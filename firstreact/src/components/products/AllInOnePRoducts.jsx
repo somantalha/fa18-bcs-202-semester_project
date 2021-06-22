@@ -2,18 +2,26 @@ import { Button, Grid, Link } from "@material-ui/core";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { withRouter } from "react-router";
+import { toast } from "react-toastify";
 import productService from "../../services/ProductService";
 import userService from "../../services/UserService";
 
 const AllInOnePRoducts = (props) => {
   const { product, onDelete, history } = props;
   console.log("in sigle product");
-  const [cookies, setCookie] = useCookies(["user"]);
-  function handleCookie() {
-    // setCookie("user", "gowtham", {
-    //   path: "/",
-    // });
-  }
+  const [cookies, setCookie, removeCookie] = useCookies(["Cart"]);
+  React.useEffect(() => {
+    if (!cookies.Cart) {
+      setCookie("Cart", JSON.stringify([]));
+    }
+  }, []);
+  const handleAddToCart = (product) => {
+    console.log(product);
+    let newCart = [...cookies.Cart];
+    newCart.push(product);
+    setCookie("Cart", JSON.stringify(newCart));
+    toast.success(product.name + "is added to Cart");
+  };
   return (
     <Grid item xs={4}>
       {" "}
@@ -87,13 +95,9 @@ const AllInOnePRoducts = (props) => {
                     color: "white",
                     marginTop: "5px",
                   }}
-                  // onClick={(e) => {
-                  //   history.push({
-                  //     pathname: "/features",
-                  //     // state: { detail: },
-                  //   });
-                  // }}
-                  onClick={handleCookie}
+                  onClick={(e) => {
+                    handleAddToCart(product);
+                  }}
                 >
                   Add To Cart
                 </Button>

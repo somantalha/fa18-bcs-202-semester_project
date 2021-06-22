@@ -1,18 +1,6 @@
-// import React from "react";
-// import Basket from "./products/Basket";
-
-// const Features = () => {
-//   return (
-//     <div>
-//       <Basket />
-//     </div>
-//   );
-// };
-
-// export default Features;
-
 import React from "react";
 import { useCookies } from "react-cookie";
+import { TableFooter } from "@material-ui/core";
 import {
   makeStyles,
   Button,
@@ -55,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Features = (props) => {
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["Cart"]);
+  console.log(cookies);
   console.log(props);
   const [qnty, setQnty] = React.useState(1);
 
@@ -69,6 +58,14 @@ const Features = (props) => {
   };
   const classes = useStyles();
   const [cartItems, setCartItems] = React.useState([]);
+  React.useEffect(() => {
+    if (cookies.Cart) {
+      setCartItems(cookies.Cart);
+    }
+  }, [cookies]);
+  const total = cartItems.reduce(function (accumulator, currentValue) {
+    return accumulator + currentValue.price;
+  }, 0);
   return (
     <div
       className="container"
@@ -76,177 +73,77 @@ const Features = (props) => {
         marginTop: "10em",
       }}
     >
-      {cookies.user && <p>{cookies.user}</p>}
       <div className="row">
-        {cartItems.length === 0 ? (
-          <>
-            <div
-              className="col-7"
-              style={{
-                marginRight: "2em",
-              }}
-            >
-              {/* Table code started */}
-              <TableContainer component={Paper}>
-                <Table
-                  className={classes.table}
-                  aria-label="simple table"
-                  style={{
-                    border: "2px solid lightgrey",
-                  }}
-                >
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>PRODUCT</TableCell>
-                      <TableCell>PRICE</TableCell>
-                      <TableCell>QUANTITY</TableCell>
-                      <TableCell>TOTAL</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow key="{row.name}">
-                      <TableCell component="th" scope="row">
-                        Empty
-                      </TableCell>
-                      <TableCell>Empty</TableCell>
-                      <TableCell>
-                        <div className="row">
-                          <Button
-                            variant="contained"
-                            size="small"
-                            style={{ fontSize: "1rem" }}
-                            onClick={handleDecrement}
-                          >
-                            -
-                          </Button>{" "}
-                          <p
-                            style={{
-                              fontSize: "1rem",
-                              background: "lightgrey",
-                              padding: "1rem",
-                              // paddingRight: "1rem",
-                              // paddingBottom: "1rem",
-                              margin: "1px",
-                            }}
-                          >
-                            {qnty}
-                          </p>{" "}
-                          <Button
-                            size="small"
-                            variant="contained"
-                            style={{ fontSize: "1rem" }}
-                            onClick={handleIncrement}
-                          >
-                            +
-                          </Button>
-                        </div>
-                      </TableCell>
-                      <TableCell>Empty</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell scope="row">
-                        <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Coupon code"
-                            style={{
-                              width: "15rem",
-                              marginTop: "1rem",
-                              borderRadius: "4rem",
-                            }}
-                          />
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Button className={classes.button} variant="contained">
-                          APPLY COUPON
-                        </Button>
-                      </TableCell>
-                      <TableCell>
-                        <Button className={classes.button} variant="contained">
-                          UPDATE CART
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              {/* Table code ending */}{" "}
-            </div>{" "}
-          </>
-        ) : (
-          <>
-            {" "}
-            <div>
-              <div
-                className="col-7"
-                style={{
-                  marginRight: "2em",
-                }}
-              >
-                {/* Table code started */}
-                <TableContainer component={Paper}>
-                  <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      <TableRow key="{row.name}">
-                        <TableCell component="th" scope="row">
-                          empty
-                        </TableCell>
-                        <TableCell align="right">row.calories</TableCell>
-                        <TableCell align="right">row.fat</TableCell>
-                        <TableCell align="right">row.carbs</TableCell>
-                        <TableCell align="right">row.protein</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell scope="row">
-                          <div class="form-group">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Coupon code"
-                              style={{
-                                width: "15rem",
-                                marginTop: "1rem",
-                                borderRadius: "4rem",
-                              }}
-                            />
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <Button
-                            className={classes.button}
-                            variant="contained"
-                          >
-                            APPLY COUPON
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <Button
-                            className={classes.button}
-                            variant="contained"
-                          >
-                            UPDATE CART
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                {/* Table code ending */}{" "}
-              </div>
-            </div>{" "}
-          </>
-        )}
+        <div
+          className="col-7"
+          style={{
+            marginRight: "1em",
+          }}
+        >
+          {/* Table code started */}
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>PRODUCT</TableCell>
+                  <TableCell>NAME</TableCell>
+                  <TableCell>PRICE</TableCell>
+                  <TableCell>QUANTITY</TableCell>
+                  <TableCell>TOTAL</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {cartItems.map((p, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <img
+                        src={"http://localhost:4000/" + p.productImage}
+                        width="50%"
+                        style={{ height: "10rem" }}
+                      />
+                    </TableCell>
+                    <TableCell>{p.name}</TableCell>
+                    <TableCell>{p.price}</TableCell>
+                    <TableCell>{qnty}</TableCell>
+                    <TableCell>
+                      {qnty}*{p.price}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TableCell scope="row">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Coupon code"
+                        style={{
+                          width: "15rem",
+                          marginTop: "1rem",
+                          borderRadius: "4rem",
+                        }}
+                      />
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Button className={classes.button} variant="contained">
+                      APPLY COUPON
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button className={classes.button} variant="contained">
+                      UPDATE CART
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+          {/* Table code ending */}{" "}
+        </div>
+
         <div
           className="col-4"
           style={{
@@ -268,7 +165,7 @@ const Features = (props) => {
             <p className="row" style={{ marginLeft: "0.5rem" }}>
               <p className="col-3">Subtotals:</p>{" "}
               <p className="col-9" style={{ paddingLeft: "2rem" }}>
-                $79.65
+                ${total}
               </p>
             </p>
             <hr
@@ -365,7 +262,7 @@ const Features = (props) => {
                 TOTAL:
               </p>{" "}
               <p className="col-9" style={{ paddingLeft: "2rem" }}>
-                $79.65
+                ${total}
               </p>
             </p>
             <Button className={classes.buttonblack} variant="contained">

@@ -154,8 +154,9 @@ const Shoes = (props) => {
   // const page = 1;
   const getData = () => {
     productService
-      .getProduct(page, perPage)
+      .getProduct(page, perPage, "shoes")
       .then((data) => {
+        console.log("data is here ", data);
         setProducts(data.products);
         setTotal(data.total);
       })
