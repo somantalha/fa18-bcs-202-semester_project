@@ -16,6 +16,7 @@ import { withRouter } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
+    // marginBottom: "3rem"
   },
   button: {
     borderRadius: "5rem",
@@ -82,7 +83,7 @@ const Features = (props) => {
           }}
         >
           {/* Table code started */}
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} style={{marginBottom:"3rem" }}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
