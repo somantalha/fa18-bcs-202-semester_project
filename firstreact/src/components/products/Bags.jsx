@@ -123,7 +123,7 @@ const Bags = (props) => {
   const page = props.match?.params?.page || 1;
   const getData = () => {
     productService
-      .getProduct(page, perPage)
+      .getProduct(page, perPage, "bags")
       .then((data) => {
         setProducts(data.products);
         setTotal(data.total);

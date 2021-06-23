@@ -98,7 +98,7 @@ const Watches = (props) => {
   const page = props.match?.params?.page || 1;
   const getData = () => {
     productService
-      .getProduct(page, perPage)
+      .getProduct(page, perPage, "watches")
       .then((data) => {
         setProducts(data.products);
         setTotal(data.total);

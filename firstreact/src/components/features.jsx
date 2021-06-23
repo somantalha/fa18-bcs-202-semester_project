@@ -63,6 +63,7 @@ const Features = (props) => {
       setCartItems(cookies.Cart);
     }
   }, [cookies]);
+
   const total = cartItems.reduce(function (accumulator, currentValue) {
     return accumulator + currentValue.price;
   }, 0);
