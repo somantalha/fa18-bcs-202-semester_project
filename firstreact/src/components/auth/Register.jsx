@@ -18,6 +18,7 @@ const Register = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [name, setName] = React.useState("");
+  const [role, setRole] = React.useState("user");
 
   return (
     <div className={classes.container}>
@@ -50,13 +51,22 @@ const Register = () => {
             setPassword(e.target.value);
           }}
         />{" "}
+        <TextField
+          label="Role"
+          name="role"
+          fullWidth
+          className="form-group"
+          onChange={(e) => {
+            setRole(e.target.value);
+          }}
+        />{" "}
         <br />
         <Button
           variant="contained"
           color="primary"
           onClick={(e) => {
             userService
-              .register(name, email, password)
+              .register(name, email, password, role)
               .then((data) => {
                 console.log(data);
                 toast.success("Successfully Registered !", {

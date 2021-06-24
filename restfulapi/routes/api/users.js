@@ -13,6 +13,8 @@ router.post("/register", async (req, res) => {
   user.email = req.body.email;
   user.password = req.body.password;
   user.role = req.body.role;
+  console.log("user api");
+  console.log(user);
   await user.generateHashedPassword();
   await user.save();
   let token = jwt.sign(

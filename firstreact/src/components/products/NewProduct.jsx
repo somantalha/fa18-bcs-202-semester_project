@@ -41,6 +41,7 @@ const NewProduct = (props) => {
                 formData.append("price", price);
                 formData.append("category", category);
                 formData.append("quantity", quantity);
+                // formData.append("role", role);
                 formData.append("productImage", stateimg.productImage);
                 // for (var key of formData.entries()) {
                 //   console.log(key[1]);
@@ -93,6 +94,7 @@ const NewProduct = (props) => {
                   setQuantity(e.target.value);
                 }}
               />
+
               <p> </p>
               <div className="form-group">
                 <input
